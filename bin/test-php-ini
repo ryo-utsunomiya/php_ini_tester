@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../src/PhpIniTester.php';
+
+$options = getopt('', ['ini:', 'spec:']);
+
+if (isset($options['ini'])) {
+    $iniFile = $options['ini'];
+    if (!is_file($iniFile)) {
+        usage();
+        exit(1);
+    }
+} else {
+    $iniFile = php_ini_loaded_file();
+}
+
+if (isset($options['spec'])) {
+    $specFile = $options['spec'];
+    if (!is_file($specFile)) {
+        usage();
+        exit(1);
+    }
+} else {
+    usage();
+    exit(1);
+}
+
+echo new PhpIniTester($iniFile, $specFile);
+
+function usage()
+{
+    fputs(STDERR, "Usage: php-ini-diff --ini /path/to/ini --spec /path/to/spec.json\n");
+}
