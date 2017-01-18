@@ -52,6 +52,8 @@ class PhpIniTester
                 if ($this->normalize($actual) !== $this->normalize($expected)) {
                     $result[] = sprintf("%s is expected to set '%s'. actual: '%s'\n", $setting, $expected, $actual);
                 }
+            } else {
+                fputs(STDERR, sprintf('No such setting: %s', $setting));
             }
         }
 
