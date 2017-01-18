@@ -46,14 +46,15 @@ class PhpIniTester
         $result = [];
 
         foreach ($this->spec as $setting => $expected) {
-            if (isset($this->ini[$setting])) {
-                $actual = $this->ini[$setting];
-
-                if ($this->normalize($actual) !== $this->normalize($expected)) {
-                    $result[] = sprintf("%s is expected to set '%s'. actual: '%s'\n", $setting, $expected, $actual);
-                }
-            } else {
+            if (!isset($this->ini[$setting])) {
                 fputs(STDERR, sprintf('No such setting: %s', $setting));
+                continue;
+            }
+
+            $actual = $this->ini[$setting];
+
+            if ($this->normalize($actual) !== $this->normalize($expected)) {
+                $result[] = sprintf("%s is expected to set '%s'. actual: '%s'\n", $setting, $expected, $actual);
             }
         }
 
