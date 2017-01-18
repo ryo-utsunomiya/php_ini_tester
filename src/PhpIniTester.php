@@ -47,7 +47,7 @@ class PhpIniTester
 
         foreach ($this->spec as $setting => $expected) {
             if (!isset($this->ini[$setting])) {
-                fputs(STDERR, sprintf('No such setting: %s', $setting));
+                fputs(STDERR, sprintf("No such setting: %s\n", $setting));
                 continue;
             }
 
