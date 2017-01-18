@@ -63,16 +63,16 @@ class PhpIniTester
 
     /**
      * @param string $value
-     * @return int
+     * @return string
      */
     private function normalize($value)
     {
         if (strtolower($value) === 'off' || $value === '' || $value === 0 || $value === '0' || $value === false) {
-            return 0;
+            return '0';
         } elseif (strtolower($value) === 'on' || $value === 1 || $value === '1' || $value === true) {
-            return 1;
+            return '1';
         } else {
-            return $value;
+            return (string)$value;
         }
     }
 
