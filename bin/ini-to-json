@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+if (!isset($argv[1])) {
+    usage();
+    exit(1);
+}
+
+$iniFile = $argv[1];
+
+if (!is_file($iniFile)) {
+    usage();
+    exit(1);
+}
+
+$iniData = parse_ini_file($iniFile);
+
+if (false === $iniData) {
+    fputs(STDERR, sprintf("Failed to parse ini file %s\n", $iniFile));
+    exit(1);
+}
+
+// Save json file in current directory
+$jsonFile = basename($iniFile) . '.json';
+file_put_contents($jsonFile, json_encode($iniData, JSON_PRETTY_PRINT));
+printf("%s was converted into %s\n", $iniFile, $jsonFile);
+
+function usage()
+{
+    fputs(STDERR, "Usage: ini-to-json /path/to/php.ini\n");
+}
