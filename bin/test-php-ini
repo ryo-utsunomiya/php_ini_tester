@@ -30,5 +30,5 @@ echo new PhpIniTester($iniFile, $specFile);
 
 function usage()
 {
-    fputs(STDERR, "Usage: php-ini-diff --ini /path/to/ini --spec /path/to/spec.json\n");
+    fputs(STDERR, "Usage: test-php-ini --ini /path/to/ini --spec /path/to/spec.json\n");
 }
