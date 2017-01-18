@@ -47,14 +47,14 @@ class PhpIniTester
 
         foreach ($this->spec as $setting => $expected) {
             if (!isset($this->ini[$setting])) {
-                fputs(STDERR, sprintf("No such setting: %s\n", $setting));
+                $result[] = sprintf("No such setting: %s", $setting);
                 continue;
             }
 
             $actual = $this->ini[$setting];
 
             if ($this->normalize($actual) !== $this->normalize($expected)) {
-                $result[] = sprintf("%s is expected to set '%s'. actual: '%s'\n", $setting, $expected, $actual);
+                $result[] = sprintf("%s is expected to set '%s'. actual: '%s'", $setting, $expected, $actual);
             }
         }
 
